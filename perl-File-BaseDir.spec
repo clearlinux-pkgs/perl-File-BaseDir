@@ -4,24 +4,32 @@
 #
 Name     : perl-File-BaseDir
 Version  : 0.08
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/K/KI/KIMRYAN/File-BaseDir-0.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/K/KI/KIMRYAN/File-BaseDir-0.08.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-basedir-perl/libfile-basedir-perl_0.08-1.debian.tar.xz
 Summary  : 'Use the Freedesktop.org base directory specification'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-File-BaseDir-license
-Requires: perl-File-BaseDir-man
+Requires: perl-File-BaseDir-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(File::Which)
 BuildRequires : perl(IPC::System::Simple)
-BuildRequires : perl(Module::Build::Compat)
 
 %description
 File-BaseDir
 ============
 This module can be used to find directories and files as specified
 by the Freedekstop.org Base Directory Specification.
+
+%package dev
+Summary: dev components for the perl-File-BaseDir package.
+Group: Development
+Provides: perl-File-BaseDir-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-File-BaseDir package.
+
 
 %package license
 Summary: license components for the perl-File-BaseDir package.
@@ -31,19 +39,11 @@ Group: Default
 license components for the perl-File-BaseDir package.
 
 
-%package man
-Summary: man components for the perl-File-BaseDir package.
-Group: Default
-
-%description man
-man components for the perl-File-BaseDir package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n File-BaseDir-0.08
-mkdir -p %{_topdir}/BUILD/File-BaseDir-0.08/deblicense/
+cd ..
+%setup -q -T -D -n File-BaseDir-0.08 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-BaseDir-0.08/deblicense/
 
 %build
@@ -68,12 +68,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-File-BaseDir
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-File-BaseDir/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-BaseDir
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-BaseDir/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -82,16 +82,16 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/File/BaseDir.pm
-/usr/lib/perl5/site_perl/5.26.1/File/IconTheme.pm
-/usr/lib/perl5/site_perl/5.26.1/File/UserDirs.pm
+/usr/lib/perl5/vendor_perl/5.26.1/File/BaseDir.pm
+/usr/lib/perl5/vendor_perl/5.26.1/File/IconTheme.pm
+/usr/lib/perl5/vendor_perl/5.26.1/File/UserDirs.pm
 
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-File-BaseDir/deblicense_copyright
-
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/File::BaseDir.3
 /usr/share/man/man3/File::IconTheme.3
 /usr/share/man/man3/File::UserDirs.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-File-BaseDir/deblicense_copyright
