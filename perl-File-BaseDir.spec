@@ -4,7 +4,7 @@
 #
 Name     : perl-File-BaseDir
 Version  : 0.08
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/K/KI/KIMRYAN/File-BaseDir-0.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/K/KI/KIMRYAN/File-BaseDir-0.08.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-basedir-perl/libfile-basedir-perl_0.08-1.debian.tar.xz
@@ -107,6 +107,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/File/BaseDir.pm
-/usr/lib/perl5/vendor_perl/5.30.2/File/IconTheme.pm
-/usr/lib/perl5/vendor_perl/5.30.2/File/UserDirs.pm
+/usr/lib/perl5/vendor_perl/5.30.3/File/BaseDir.pm
+/usr/lib/perl5/vendor_perl/5.30.3/File/IconTheme.pm
+/usr/lib/perl5/vendor_perl/5.30.3/File/UserDirs.pm
