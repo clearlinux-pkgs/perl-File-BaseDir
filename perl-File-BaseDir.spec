@@ -4,7 +4,7 @@
 #
 Name     : perl-File-BaseDir
 Version  : 0.09
-Release  : 19
+Release  : 20
 URL      : https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/File-BaseDir-0.09.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/File-BaseDir-0.09.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-basedir-perl/libfile-basedir-perl_0.08-1.debian.tar.xz
@@ -80,6 +80,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-BaseDir
+cp %{_builddir}/File-BaseDir-0.09/LICENSE %{buildroot}/usr/share/package-licenses/perl-File-BaseDir/f87c4738bd2a96fb9c6b23ce909b735773545176
 cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-File-BaseDir/a4fc2db832b0bbb50e622f2cc52dea8078e3b2f4
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
@@ -103,9 +104,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/perl-File-BaseDir/a4fc2db832b0bbb50e622f2cc52dea8078e3b2f4
+/usr/share/package-licenses/perl-File-BaseDir/f87c4738bd2a96fb9c6b23ce909b735773545176
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/File/BaseDir.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/IconTheme.pm
-/usr/lib/perl5/vendor_perl/5.34.0/File/UserDirs.pm
+/usr/lib/perl5/*
