@@ -7,7 +7,7 @@
 #
 Name     : perl-File-BaseDir
 Version  : 0.09
-Release  : 27
+Release  : 28
 URL      : https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/File-BaseDir-0.09.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/P/PL/PLICEASE/File-BaseDir-0.09.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-basedir-perl/libfile-basedir-perl_0.08-1.debian.tar.xz
